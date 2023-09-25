@@ -1,0 +1,113 @@
+/* .header h1{
+    padding-right: 85rem;
+    font-style: inherit;
+    font-size: 35px;
+    font-family: 'Croissant One', cursive;
+    color: #a9f473 !important;
+} */
+.header{
+    font-style:inherit;
+    font-size: large !important;
+    font-family: 'Croissant One', cursive;
+    color: #b0ff76;
+    /* margin: 0; */
+    /* font-weight: lighter; */
+}
+
+.header h1 {
+    font-size: calc(1.375rem + 1.5vw) !important;
+    font-weight: normal !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    /* background-color: #f0f0f0; */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+    opacity: 85%;
+    background-color: rgb(183, 223, 138) ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* h1 {
+    text-align: center;
+    color: #333;
+} */
+.title {
+    text-align: center;
+    color: #333;
+    font-family: Georgia, 'Times New Roman', Times, serif;  
+
+}
+
+.flight-list {
+    list-style: none;
+    padding: 0;
+}
+
+.flight-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.flight-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.flight-item h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.flight-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.flight-info p {
+    margin: 0;
+    color: #666;
+}
+
+.flight-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #0074d9;
+}
+
+.duration{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagee{
+    height: 2rem;
+    margin-left: 10px;
+}
+
+.imag-cont{
+    display: flex;
+
+}

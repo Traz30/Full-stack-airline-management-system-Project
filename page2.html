@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Flights</title>
+    <link rel="stylesheet" href="page2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" integrity="sha512-HXXR0l2yMwHDrDyxJbrMD9eLvPe3z3qL3PPeozNTsiHJEENxx8DH2CxmV05iwG0dwoz5n4gQZQyYLUNt1Wdgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="header">
+        <h1>Easy Fly</h1>
+    </div>
+    <div class="container">
+        <div class="title">
+        <h1 id="flightTitle" >Available Flights</h1>
+        </div>
+        <ul class="flight-list" id="flightList">
+            <!-- <li class="flight-item">
+                <div class="imag-cont">
+                    <h2>Flight 1</h2> 
+                    <img class="imagee" src="airplane.png" alt="">
+                </div>
+                <div class="flight-info">
+                    <p>Departure: City A</p>
+                    <div class="duration">
+                        <p>Duration</p>
+                        <i class="ri-git-commit-line"></i>
+                        <p>1h 30m</p>
+                    </div>
+                    <p>Destination: City B</p>
+                </div>
+                <div class="flight-info">
+                    <p>Departure Time: 08:00 AM</p>
+                    <p class="flight-price">₹200</p>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const departureCity = localStorage.getItem("departureCity");
+            const arrivalCity = localStorage.getItem("arrivalCity");
+
+            var flightTitle = document.getElementById("flightTitle");
+            if (departureCity !== null && arrivalCity !== null) {
+                flightTitle.textContent = "Available flights from " + arrivalCity + " to " + departureCity;
+            } else {
+                var container = document.querySelector(".container");
+                container.style.display = "none";
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const departureCity = localStorage.getItem("departureCity");
+        const arrivalCity = localStorage.getItem("arrivalCity");
+
+        var flightTitle = document.getElementById("flightTitle");
+        var flightList = document.getElementById("flightList"); // Changed this line to select the UL element
+
+        if (departureCity !== null && arrivalCity !== null) {
+            flightTitle.textContent = "Available flights from " + departureCity + " to " + arrivalCity;
+
+        // Make an AJAX request to fetch flight data
+        fetch(`http://localhost:4001/flights?departureCity=${departureCity}&arrivalCity=${arrivalCity}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the flight data received from the server
+                console.log(data); // You can process and display the data as needed
+
+                data.forEach(flight => {
+                const listItem = document.createElement("li");
+                listItem.classList.add("flight-item");
+
+                // Create the container for flight title and image
+                const flightTitleAndImageContainer = document.createElement("div");
+                flightTitleAndImageContainer.classList.add("imag-cont");
+
+                // Create the flight title (e.g., "Flight 1")
+                const heading = document.createElement("h2");
+                heading.textContent = `Flight ${flight.airline_name}`;
+
+                // Create the image tag and set its source and alt text
+                const image = document.createElement("img");
+                image.classList.add("imagee");
+                image.src = "airplane2.png"; // Set the source path to your image
+                image.alt = "Airplane Image";
+
+                    const flightInfo = document.createElement("div");
+                    flightInfo.classList.add("flight-info");
+
+                    const departureInfo = document.createElement("p");
+                    departureInfo.textContent = `Departure: ${flight.departure_airport}`;
+
+                    const durationTextOnly = document.createElement("p");
+                    durationTextOnly.textContent = "Duration";
+
+                    const duration = calcDuration(flight.departure_time, flight.arrival_time);
+                    const durationText = document.createElement("p");
+                    durationText.textContent = duration;
+                    
+
+                    const durationInfo = document.createElement("div");
+                    durationInfo.classList.add("duration");
+
+                    const durationIcon = document.createElement("i");
+                    durationIcon.classList.add("ri-git-commit-line");
+
+                    const destinationInfo = document.createElement("p");
+                    destinationInfo.textContent = `Destination: ${flight.arrival_airport}`;
+
+                    const departureTimeAndPriceInfo = document.createElement("div");
+                    departureTimeAndPriceInfo.classList.add("flight-info");
+
+                    const departureTimeInfo = document.createElement("p");
+                    departureTimeInfo.textContent = `Departure Time: ${flight.departure_time}`;
+
+                    const priceInfo = document.createElement("p");
+                    priceInfo.classList.add("flight-price");
+                    priceInfo.textContent = `₹${flight.price}`;
+                    flightTitleAndImageContainer.appendChild(heading);
+                    flightTitleAndImageContainer.appendChild(image);
+
+                    durationInfo.appendChild(durationTextOnly);
+                    durationInfo.appendChild(durationIcon);
+                    durationInfo.appendChild(durationText);
+                    
+
+                    flightInfo.appendChild(departureInfo);
+                    flightInfo.appendChild(durationInfo);
+                    flightInfo.appendChild(destinationInfo);
+
+                    departureTimeAndPriceInfo.appendChild(departureTimeInfo);
+                    departureTimeAndPriceInfo.appendChild(priceInfo);
+
+                    listItem.appendChild(flightTitleAndImageContainer);
+                    listItem.appendChild(flightInfo);
+                    listItem.appendChild(departureTimeAndPriceInfo);
+
+                    // flightList.appendChild(listItem);
+                    listItem.appendChild(flightInfo);
+                    listItem.appendChild(departureTimeAndPriceInfo);
+
+                    flightList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching flight data:', error);
+                // You can also display an error message to the user here
+            });
+    } else {
+        var container = document.querySelector(".container");
+        container.style.display = "none";
+    }
+});
+
+const calcDuration = (departureTime, arrivalTime) => {
+    const departureTimeSplit = departureTime.split(":");
+    const departureHour = parseInt(departureTimeSplit[0]);
+    const departureMinute = parseInt(departureTimeSplit[1]);
+
+    const arrivalTimeSplit = arrivalTime.split(":");
+    const arrivalHour = parseInt(arrivalTimeSplit[0]);
+    const arrivalMinute = parseInt(arrivalTimeSplit[1]);
+
+    const durationHour = Math.abs(arrivalHour - departureHour);
+    const durationMinute = Math.abs(arrivalMinute - departureMinute);
+
+    return `${durationHour}h ${durationMinute}m`;
+};
+
+
+
+    </script>
+</body>
+</html>

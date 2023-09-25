@@ -1,0 +1,54 @@
+
+body {
+    background-image: url('bg.jpg'); /* Replace 'your-image-url.jpg' with the URL or path to your image */
+    background-size: cover; /* This property ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    /* You can also set other properties like background-position if needed */
+}
+.header{
+    font-style:inherit;
+    font-size: large !important;
+    font-family: 'Croissant One', cursive;
+    color: #b0ff76;
+}
+
+.container {
+    background-color:rgb(183, 223, 138) ;
+    border-radius: 15px;
+    width: 45rem !important;
+    opacity: 75%;
+    height: 20rem;
+    margin-top: 20px;
+}
+.button-container {
+    text-align: center;
+    margin-top: 30px; /* Adjust the margin as needed */
+}
+.btn:hover{
+    background-color: rgb(5, 63, 80) !important;
+    box-shadow: -1px 4px 11px 0px rgba(0,0,0,0.75);
+    opacity: 100%;
+}
+
+/* Style the button */
+.my-button {
+    padding: 10px 20px; /* Adjust the padding as needed */
+    background-color: #0074d9; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    cursor: pointer;
+    font-size: 16px; /* Button text size */
+    border-radius: 5px; /* Add rounded corners to the button */
+}
+.d-flex mb-3{
+    text-align: center;
+}
+
+.dep-date{
+    margin-top: .9rem ;
+    border-radius: 5px;
+}
+
+.h7{
+    margin-bottom: 1rem;
+}
